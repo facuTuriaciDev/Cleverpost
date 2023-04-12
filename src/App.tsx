@@ -1,13 +1,18 @@
-import { useState } from 'react'
 import './App.css'
+import Home from './pages/Home'
+import Navbar from './components/Navbar'
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 function App() {
-
   return (
-    <div className="App">
-     <h1>Hello World!</h1>
-    </div>
-  )
+    <Provider store={store}>
+      <div className='App'>
+        <Navbar />
+        <Home />
+      </div>
+    </Provider>
+  );
 }
 
 export default App

@@ -1,0 +1,10 @@
+@import './theme/variables.scss';
+
+:root {
+  background-color: $background-color;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

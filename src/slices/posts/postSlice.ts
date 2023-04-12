@@ -8,11 +8,6 @@ export interface Post {
   body: string;
 }
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
-  return response.data;
-});
-
 interface PostState {
   posts: Post[];
   status: 'idle' | 'loading' | 'failed';
@@ -24,6 +19,11 @@ const initialState: PostState = {
   status: 'idle',
   error: null
 };
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
+  return response.data;
+});
 
 const postSlice = createSlice({
   name: 'post',

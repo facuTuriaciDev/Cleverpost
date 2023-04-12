@@ -1,0 +1,21 @@
+input {
+  font-size: 20px;
+  border: 3px solid #e8e8e8;
+  background-color: rgb(235, 233, 233);
+  border-radius: 25px;
+  padding: 10px 30px 10px 30px;
+  margin: 10px;
+  width: 200px;
+  height: 20px;
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  input {
+    display: inline-block;
+    max-width: none;
+  }
+}

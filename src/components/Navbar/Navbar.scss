@@ -1,0 +1,33 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0 40px 0 40px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  margin-bottom: 40px;
+
+  &__title {
+    font-size: 2rem;
+    color: #416a93;
+  }
+
+  &__separator {
+    width: 100%;
+    height: 1px;
+    border-radius: 4px;
+    background-color: grey;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+  }
+}

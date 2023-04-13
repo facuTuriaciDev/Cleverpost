@@ -1,10 +1,12 @@
 import { ChangeEvent } from 'react';
 import './SearchBar.scss'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSearchTerm} from '../../slices/posts/searchSlice';
+import { useTranslation } from 'react-i18next';
 
 function SearchBar() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchTerm(e.target.value));
@@ -12,7 +14,7 @@ function SearchBar() {
 
   return (
     <div>        
-      <input className="input" placeholder="Buscar en Cleverpost" onChange={handleFilter}/>
+      <input className="input" placeholder={t('searchCleverpost')} onChange={handleFilter}/>
     </div>
   )
 }

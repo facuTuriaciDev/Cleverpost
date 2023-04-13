@@ -7,7 +7,6 @@ import { setTheme } from '../../slices/theme/themeSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
-
 function Navbar() {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
 
@@ -27,7 +26,7 @@ function Navbar() {
       icon={currentTheme === 'light' ? faSun : faMoon} 
       style={{color: "#fac400",}} 
       />
-      
+
       </div>
     </div>
   )

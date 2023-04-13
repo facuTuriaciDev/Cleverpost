@@ -1,8 +1,15 @@
+@import '../../theme/variables.scss';
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
-  padding: 0 50px 0 50px;
+  padding: 40px 50px 0 50px;
+}
+
+.night {
+  background-color: $background-container-color-dark;
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {

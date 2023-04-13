@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { fetchPosts } from '../../slices/posts/postSlice';
@@ -10,6 +10,7 @@ const Home: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
   const posts = useSelector((state: RootState) => state.post.posts);
   const searchTerm = useSelector((state: RootState) => state.search.body);
+  const currentTheme = useSelector((state: RootState) => state.theme);
 
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
@@ -18,14 +19,12 @@ const Home: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = posts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredPosts(filtered);
   }, [posts, searchTerm]);
 
   return (
-    <div className='card-container'>
+    <div className={`card-container ${currentTheme}`}>
       {filteredPosts.map((post) => (
         <Card key={post.id} post={post} />
       ))}

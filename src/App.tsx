@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import { Provider } from 'react-redux';

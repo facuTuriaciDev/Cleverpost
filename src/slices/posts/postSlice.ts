@@ -29,7 +29,10 @@ const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    //TODO addPost, deletePost, editPost
+    //TODO add post, edit post
+    deletePost: (state, action) => {
+      state.posts = state.posts.filter((post) => post.id !== action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -46,5 +49,7 @@ const postSlice = createSlice({
       });
   }
 });
+
+export const { addPost, deletePost, editPost } = postSlice.actions;
 
 export default postSlice.reducer;

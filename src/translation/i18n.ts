@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import resources from './locales';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -14,16 +15,7 @@ i18next
 .init({
   fallbackLng: "en",
   resources: {
-    en: {
-      translation: {
-        'searchCleverpost': "Search in Cleverpost"
-      }
-    },
-    es: {
-      translation: {
-        'searchCleverpost': "Buscar en Cleverpost"
-      }
-    }
+    ...resources
   }
 });
 

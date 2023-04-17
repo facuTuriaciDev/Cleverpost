@@ -1,22 +1,27 @@
 import { useState } from 'react';
 import './WriteQuoteModal.scss';
 import CustomButton  from '../../components/CustomButton';
-import { addPost } from '../../slices/posts/postSlice';
+import { addPost, editPost } from '../../slices/posts/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { translate, generateRandomNumber } from '../../utils/utils';
+import { closeModal } from '../../slices/modal/modalSlice';
 
 interface ModalProps {
   handleClose?: () => void;
-  isOpen: boolean;
+  actualPost?: any;
 }
 
-function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
+function WriteQuoteModal({ handleClose }: ModalProps) {
+  const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
+  const selectedPost = useSelector((state: RootState) => state.post.selectedPost);
+  const isNewPost = useSelector((state: RootState) => state.modal.isNewPost);
+
+  const [postTitle, setPostTitle] = useState(isNewPost ? '' : selectedPost.title);
+  const [postBody, setPostBody] = useState((isNewPost ? '' : selectedPost.body));
   
   const writeTitleText = translate('writeTitle');
   const writeSentenceText = translate('writeSentence');
@@ -24,7 +29,7 @@ function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
 
   const currentTheme = useSelector((state: RootState) => state.theme);
 
-  const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
+  console.log(currentTheme)
 
   function cleanModal() {
     setPostTitle('');
@@ -38,20 +43,23 @@ function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
     handleClose && handleClose();
   }
 
-  function closeModal () {
+  function editSelectedPost (id: string) {
+    dispatch(editPost({id: `${id}`, title: `${postTitle}`, body: `${postBody}`}))
+    closeModalMethod();
+  }
+
+  function closeModalMethod () {
     cleanModal()
-    handleClose && handleClose();
+    dispatch(closeModal());
   }
 
   return (
     <>
-      { isOpen && 
+      <div className='overlay'>
+        <div className={`modal-content ${currentTheme === 'night' ? 'dark' : ''}`}>
 
-      <div className={`overlay ${isOpen ? 'open' : ''}`}>
-        <div className={`modal-content ${currentTheme ? 'dark' : ''}`}>
-
-          <div className={`modal-content__top ${currentTheme ? 'dark' : ''}`}>
-            <div onClick={closeModal} className='modal-content__top--button'>
+          <div className={`modal-content__top ${currentTheme === 'night' ? 'dark' : ''}`}>
+            <div onClick={closeModalMethod} className='modal-content__top--button'>
               <FontAwesomeIcon className='modal-content__top__icon' icon={faX} color='#2B90E9'/>
             </div>
           </div>
@@ -59,7 +67,7 @@ function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
           <div className='modal-content__title'>
               <input
                 placeholder={writeTitleText}
-                className={`modal-content__title--input  ${currentTheme ? 'dark' : ''}`}
+                className={`modal-content__title--input  ${currentTheme === 'night' ? 'dark' : ''}`}
                 type="text"
                 value={postTitle}
                 onChange={(e) => setPostTitle(e.target.value)}
@@ -69,7 +77,7 @@ function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
 
           <div className='modal-content__textarea'>
             <textarea
-              className={`${currentTheme ? 'dark' : ''}`}
+              className={`${currentTheme === 'night' ? 'dark' : ''}`}
               value={postBody}
               onChange={(e) => setPostBody(e.target.value)}
               placeholder={writeSentenceText}
@@ -80,12 +88,12 @@ function WriteQuoteModal({ handleClose, isOpen }: ModalProps) {
           <div className={'modal-content__separator'}></div>
     
           <div className='modal-content__button'>
-            <CustomButton customClickEvent={newPost} text={sendText}/>
+            <CustomButton customClickEvent={isNewPost ? newPost : () => editSelectedPost(selectedPost.id)}  text={isNewPost ? sendText : 'Edit'}/>
+
           </div>
           
         </div>
       </div>
-      }
    </>
   );
 }

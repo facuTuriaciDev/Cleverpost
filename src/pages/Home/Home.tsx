@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { fetchPosts } from '../../slices/posts/postSlice';
-import Card from '../../components/PostCard';
+import PostCard from '../../components/PostCard';
 import { ThunkDispatch, PayloadAction } from '@reduxjs/toolkit';
 import './Home.scss';
+import WriteQuotemodal from '../../components/WriteQuoteModal/';
 
 const Home: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
@@ -13,6 +14,8 @@ const Home: React.FC = () => {
   const currentTheme = useSelector((state: RootState) => state.theme);
 
   const [filteredPosts, setFilteredPosts] = useState(posts);
+
+  const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -24,11 +27,15 @@ const Home: React.FC = () => {
   }, [posts, searchTerm]);
 
   return (
-    <div className={`card-container ${currentTheme}`}>
-      {filteredPosts.map((post) => (
-        <Card key={post.id} post={post} />
-      ))}
-    </div>
+    <>
+      { isModalOpen && <WriteQuotemodal/> }
+
+      <div className={`card-container ${currentTheme}`}>
+        {filteredPosts.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ))}
+      </div>
+    </>
   );
 };
 

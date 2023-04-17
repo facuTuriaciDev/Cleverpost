@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
@@ -25,7 +25,7 @@
   width: 40%;
   min-height: 450px;
   border-radius: 15px;
-  z-index: 2;
+  z-index: 5;
 
   &__top {
     height: 75px;

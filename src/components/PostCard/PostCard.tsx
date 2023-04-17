@@ -1,9 +1,7 @@
-import { Post } from '../../slices/posts/postSlice';
 import './PostCard.scss';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../slices/posts/postSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost, Post, selectPost } from '../../slices/posts/postSlice';
 import { themeFormat } from '../../utils/utils';
 import { users } from '../../data/users';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -20,11 +18,15 @@ const Card: React.FC<CardProps> = ({ post }) => {
     dispatch(deletePost(post.id));
   }
 
+  function handleSelectPost() {
+    dispatch(selectPost(post));
+  }
+
   return (
     <div className={themeFormat('card', 'card-background-night', currentTheme)}>
 
-      <div className={themeFormat('card__body', 'card-night', currentTheme)}>
-        <DropdownMenu handleDelete={handleDelete} currentTheme={currentTheme} />
+      <div onClick={handleSelectPost} className={themeFormat('card__body', 'card-night', currentTheme)}>
+        <DropdownMenu handleDelete={ handleDelete} currentTheme={currentTheme}/>
         <img className="card__avatar" src={`src/assets/avatars/${post.userId}.jpg`} alt="" />
         <h4 className="card__user">{users[post.userId]} </h4>
       </div>

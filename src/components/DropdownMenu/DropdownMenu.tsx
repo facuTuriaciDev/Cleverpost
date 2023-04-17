@@ -1,8 +1,12 @@
+import './DropdownMenu.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faPen, faClose, faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import DropdownElement from '../DropdownElement';
-import './DropdownMenu.scss';
+import { openModal, editPost  } from '../../slices/modal/modalSlice';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../redux/store';
 
 interface DropdownMenuProps {
   handleDelete: () => void;
@@ -10,8 +14,14 @@ interface DropdownMenuProps {
 }
 
 function DropdownMenu({ handleDelete, currentTheme}: DropdownMenuProps) {
-
   const [isButtonEnabled, setButtonEnabled] = useState(false);
+
+  const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
+
+  function newPost() {
+    dispatch(editPost());
+    dispatch(openModal());
+  }
   
   function handleMenu(): void {
 
@@ -37,13 +47,9 @@ function DropdownMenu({ handleDelete, currentTheme}: DropdownMenuProps) {
       </div>
       {
         isButtonEnabled && 
-        <div className={
-          `options-container ${currentTheme} options-container--show`}>
-        
-          <DropdownElement classProp={'options-container__box'} customText={'delete'} icon={faTrashCan} size='xl' handleDelete={handleDelete} color='red' />
-
-          <DropdownElement classProp={'options-container__box'} customText={'edit'} icon={faPen} size='xl' color='black' />
-
+        <div className={`options-container ${currentTheme} options-container--show`}>
+          <DropdownElement classProp={'options-container__box'} customText={'delete'} icon={faTrashCan} size='xl' customFunction={handleDelete} color='red' />
+          <DropdownElement classProp={'options-container__box'} customText={'edit'} icon={faPen} size='xl' color='black' customFunction={newPost}/>
         </div>
       }
     </>

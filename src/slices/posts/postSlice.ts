@@ -12,12 +12,14 @@ interface PostState {
   posts: Post[];
   status: 'idle' | 'loading' | 'failed';
   error: string | null;
+  selectedPost: any,
 }
 
 const initialState: PostState = {
   posts: [],
   status: 'idle',
-  error: null
+  error: null,
+  selectedPost: null,
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -36,12 +38,15 @@ const postSlice = createSlice({
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
     editPost: (state, action) => {
-      const post = state.posts.find((post) => post.id === action.payload.id);
+      const post = state.posts.find((post) => post.id === Number(action.payload.id));
       if (post) {
         post.title = action.payload.title;
         post.body = action.payload.body;
       }
-    }
+    },
+    selectPost: (state, action ) => {
+      state.selectedPost = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,6 +64,6 @@ const postSlice = createSlice({
   }
 });
 
-export const { addPost, deletePost, editPost } = postSlice.actions;
+export const { addPost, deletePost, editPost, selectPost } = postSlice.actions;
 
 export default postSlice.reducer;

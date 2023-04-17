@@ -18,7 +18,7 @@ function DropdownMenu({ handleDelete, currentTheme}: DropdownMenuProps) {
 
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
 
-  function newPost() {
+  function handleEdit() {
     dispatch(editPost());
     dispatch(openModal());
   }
@@ -49,7 +49,7 @@ function DropdownMenu({ handleDelete, currentTheme}: DropdownMenuProps) {
         isButtonEnabled && 
         <div className={`options-container ${currentTheme} options-container--show`}>
           <DropdownElement classProp={'options-container__box'} customText={'delete'} icon={faTrashCan} size='xl' customFunction={handleDelete} color='red' />
-          <DropdownElement classProp={'options-container__box'} customText={'edit'} icon={faPen} size='xl' color='black' customFunction={newPost}/>
+          <DropdownElement classProp={'options-container__box'} customText={'edit'} icon={faPen} size='xl' color='black' customFunction={handleEdit}/>
         </div>
       }
     </>

@@ -32,17 +32,27 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     addPost: (state, action) => {
-      state.posts.push(action.payload);
+      return {
+        ...state,
+        posts: [...state.posts, action.payload]
+      }
     },
     deletePost: (state, action) => {
-      state.posts = state.posts.filter((post) => post.id !== action.payload);
+      const updatedPosts = state.posts.filter((post) => post.id !== action.payload);
+      return {
+        ...state,
+        posts: updatedPosts
+      }
     },
     editPost: (state, action) => {
-      const post = state.posts.find((post) => post.id === Number(action.payload.id));
-      if (post) {
-        post.title = action.payload.title;
-        post.body = action.payload.body;
-      }
+      const { id, title, body } = action.payload;
+      const updatedPosts = state.posts.map(post => {
+        if (post.id === id) {
+          return { ...post, title, body };
+        }
+        return post;
+      });
+      state.posts = updatedPosts;
     },
     selectPost: (state, action ) => {
       state.selectedPost = action.payload;

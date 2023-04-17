@@ -10,12 +10,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { translate, generateRandomNumber } from '../../utils/utils';
 import { closeModal } from '../../slices/modal/modalSlice';
 
-interface ModalProps {
-  handleClose?: () => void;
-  actualPost?: any;
-}
-
-function WriteQuoteModal({ handleClose }: ModalProps) {
+function WriteQuoteModal() {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
   const selectedPost = useSelector((state: RootState) => state.post.selectedPost);
   const isNewPost = useSelector((state: RootState) => state.modal.isNewPost);
@@ -26,31 +21,29 @@ function WriteQuoteModal({ handleClose }: ModalProps) {
   const writeTitleText = translate('writeTitle');
   const writeSentenceText = translate('writeSentence');
   const sendText = translate('send');
+  const editText = translate('edit');
 
   const currentTheme = useSelector((state: RootState) => state.theme);
-
-  console.log(currentTheme)
 
   function cleanModal() {
     setPostTitle('');
     setPostBody('');
   }
 
+  function closeModalMethod () {
+    cleanModal()
+    dispatch(closeModal());
+  }
+
   function newPost() {
-    cleanModal();    
     dispatch(addPost({title: `${postTitle}`, body: `${postBody}`, 
       id: `${generateRandomNumber(1000000)}`, userId: `${generateRandomNumber(11)}`}))
-    handleClose && handleClose();
+    closeModalMethod();
   }
 
   function editSelectedPost (id: string) {
     dispatch(editPost({id: `${id}`, title: `${postTitle}`, body: `${postBody}`}))
     closeModalMethod();
-  }
-
-  function closeModalMethod () {
-    cleanModal()
-    dispatch(closeModal());
   }
 
   return (
@@ -88,8 +81,7 @@ function WriteQuoteModal({ handleClose }: ModalProps) {
           <div className={'modal-content__separator'}></div>
     
           <div className='modal-content__button'>
-            <CustomButton customClickEvent={isNewPost ? newPost : () => editSelectedPost(selectedPost.id)}  text={isNewPost ? sendText : 'Edit'}/>
-
+            <CustomButton customClickEvent={isNewPost ? newPost : () => editSelectedPost(selectedPost.id)}  text={isNewPost ? sendText : editText}/>
           </div>
           
         </div>

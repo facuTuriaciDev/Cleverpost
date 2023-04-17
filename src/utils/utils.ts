@@ -8,3 +8,7 @@ export const translate = (key: string) => {
   const { t } = useTranslation();
   return t(key);
 }
+
+export const generateRandomNumber = (limitNumber: number) => {
+  return Math.floor(Math.random() * limitNumber) + 1;
+}

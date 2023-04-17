@@ -29,9 +29,18 @@ const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    //TODO add post, edit post
+    addPost: (state, action) => {
+      state.posts.push(action.payload);
+    },
     deletePost: (state, action) => {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
+    },
+    editPost: (state, action) => {
+      const post = state.posts.find((post) => post.id === action.payload.id);
+      if (post) {
+        post.title = action.payload.title;
+        post.body = action.payload.body;
+      }
     }
   },
   extraReducers: (builder) => {

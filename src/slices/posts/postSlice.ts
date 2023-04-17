@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { users } from '../../data/users';
+import {getRandomName} from '../../utils/utils';
 import axios from 'axios';
 
 export interface Post {
@@ -6,13 +8,15 @@ export interface Post {
   id: number;
   title: string;
   body: string;
+  avatar: number;
+  user: string;
 }
 
 interface PostState {
   posts: Post[];
   status: 'idle' | 'loading' | 'failed';
   error: string | null;
-  selectedPost: any,
+  selectedPost: Post | null;
 }
 
 const initialState: PostState = {
@@ -23,8 +27,21 @@ const initialState: PostState = {
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
-  return response.data;
+  const postsResponse = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
+  const posts = postsResponse.data;
+
+  const updatedPosts = posts.map(post => {
+    const randomName = getRandomName(users);
+    const randomAvatar = Math.floor(Math.random() * 21) + 1;
+
+    return {
+      ...post,
+      user: randomName,
+      avatar: randomAvatar
+    }
+  });
+
+  return updatedPosts;
 });
 
 const postSlice = createSlice({

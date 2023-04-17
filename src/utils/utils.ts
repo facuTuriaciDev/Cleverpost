@@ -12,3 +12,8 @@ export const translate = (key: string) => {
 export const generateRandomNumber = (limitNumber: number) => {
   return Math.floor(Math.random() * limitNumber) + 1;
 }
+
+export const getRandomName = (names: string[]) => {
+  const randomIndex = Math.floor(Math.random() * names.length);
+  return names[randomIndex];
+}

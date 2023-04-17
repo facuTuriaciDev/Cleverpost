@@ -3,7 +3,6 @@ import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost, Post, selectPost } from '../../slices/posts/postSlice';
 import { themeFormat } from '../../utils/utils';
-import { users } from '../../data/users';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 interface CardProps {
@@ -27,8 +26,8 @@ const Card: React.FC<CardProps> = ({ post }) => {
 
       <div onClick={handleSelectPost} className={themeFormat('card__body', 'card-night', currentTheme)}>
         <DropdownMenu handleDelete={ handleDelete} currentTheme={currentTheme}/>
-        <img className="card__avatar" src={`src/assets/avatars/${post.userId}.jpg`} alt="" />
-        <h4 className="card__user">{users[post.userId]} </h4>
+        <img className="card__avatar" src={`src/assets/avatars/${post.avatar}.jpg`} alt="" />
+        <h4 className="card__user">{post.user} </h4>
       </div>
 
       <div className={themeFormat('card__footer', 'card-background-night', currentTheme)}>

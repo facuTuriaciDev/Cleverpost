@@ -19,10 +19,10 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  padding: 0px 20px 0px 20px;
+  padding: 0px 20px 20px 20px;
   margin-bottom: 15%;
   border: 1px solid #888;
-  width: 40%;
+  width: 45%;
   min-height: 450px;
   border-radius: 15px;
   z-index: 5;
@@ -49,6 +49,8 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -60,8 +62,19 @@
       border-radius: 25px;
       padding: 10px 10px 10px 10px;
       height: 20px;
-      width: 95%;
+      width: 90%;
+      margin: 0 15px 0 0;
       outline: none;
+    }
+
+    &--chars {
+      display: flex;
+      flex-direction: row-reverse;
+      font-size: 1rem;
+      font-weight: 400;
+      width: 80%;
+      height: auto;
+      margin: 0 0 0 0;
     }
   }
 
@@ -112,17 +125,18 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    margin: 10% auto;
+    margin: 10%;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    height: 50%;
+    height: auto;
     border-radius: 10px;
     z-index: 2;
+    font-size: 1rem;
   
     textarea {
-      height: 200px;
-      width: 80%;
+      height: 250px;
+      width: 100%;
     }
   }
 }
@@ -138,13 +152,14 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    height: 50%;
+    height: auto;
     border-radius: 10px;
     z-index: 2;
+    font-size: 1rem;
   
     textarea {
-      height: 200px;
-      width: 80%;
+      height: 250px;
+      width: 100%;
     }
   }
 }

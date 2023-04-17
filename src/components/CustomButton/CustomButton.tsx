@@ -3,11 +3,12 @@ import './CustomButton.scss';
 interface customButtonProps {
   text?: string;
   customClickEvent?: () => void;
+  customClassName?: string;
 }
 
-function CustomButton({text = '', customClickEvent }: customButtonProps) {
+function CustomButton({text = '', customClassName = '', customClickEvent }: customButtonProps) {
   return  (
-    <button className="customButton" onClick={customClickEvent}>{text}</button>
+    <button className={`customButton ${customClassName}`} onClick={customClickEvent}>{text}</button>
   )
 }
 

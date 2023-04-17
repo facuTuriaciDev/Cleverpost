@@ -11,8 +11,9 @@ const useFilterPosts = ({ posts, searchTerm }: UseFilterPostsProps) => {
 
   useEffect(() => {
     const filtered = posts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
-      || post.body.toLowerCase().includes(searchTerm.toLowerCase())
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    || post.body.toLowerCase().includes(searchTerm.toLowerCase())
+    || post.user.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredPosts(filtered);
   }, [posts, searchTerm]);

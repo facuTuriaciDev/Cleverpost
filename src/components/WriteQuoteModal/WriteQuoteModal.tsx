@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './WriteQuoteModal.scss';
 import CustomButton  from '../../components/CustomButton';
 import { addPost, editPost } from '../../slices/posts/postSlice';
@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { translate, generateRandomNumber } from '../../utils/utils';
 import { closeModal } from '../../slices/modal/modalSlice';
+import { users } from '../../data/users';
+import {getRandomName} from '../../utils/utils';
 
 function WriteQuoteModal() {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
@@ -22,6 +24,29 @@ function WriteQuoteModal() {
   const writeSentenceText = translate('writeSentence');
   const sendText = translate('send');
   const editText = translate('edit');
+
+  const [titleCharsLeft, setTitleCharsLeft] = useState(isNewPost ? 0 : selectedPost.title.length);
+  const [bodyCharsLeft, setBodyCharsLeft] = useState(isNewPost ? 0 : selectedPost.body.length);
+
+  const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPostBody(e.target.value);
+    setBodyCharsLeft(e.target.value.length);
+  }
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPostTitle(e.target.value);
+    setTitleCharsLeft(e.target.value.length);
+  }
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (postBody === '' || postTitle === '') {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [postBody, postTitle]);
 
   const currentTheme = useSelector((state: RootState) => state.theme);
 
@@ -37,7 +62,7 @@ function WriteQuoteModal() {
 
   function newPost() {
     dispatch(addPost({title: `${postTitle}`, body: `${postBody}`, 
-      id: `${generateRandomNumber(1000000)}`, userId: `${generateRandomNumber(11)}`}))
+      id: `${generateRandomNumber(1000000)}`, userId: `${generateRandomNumber(21)}`, avatar: `${generateRandomNumber(21)}`, user: `${getRandomName(users)}`}))
     closeModalMethod();
   }
 
@@ -63,29 +88,41 @@ function WriteQuoteModal() {
                 className={`modal-content__title--input  ${currentTheme === 'night' ? 'dark' : ''}`}
                 type="text"
                 value={postTitle}
-                onChange={(e) => setPostTitle(e.target.value)}
+                onChange={handleTitleChange}
                 maxLength={50}
               />
+              
+              <p className=''>{`${titleCharsLeft}/50`}</p>
           </div>
 
           <div className='modal-content__textarea'>
             <textarea
               className={`${currentTheme === 'night' ? 'dark' : ''}`}
               value={postBody}
-              onChange={(e) => setPostBody(e.target.value)}
+              onChange={handleBodyChange}
               placeholder={writeSentenceText}
               maxLength={400}
             />
           </div>
 
+          <div className='modal-content__title--chars'>
+            <p>{`${bodyCharsLeft}/400`}</p>
+          </div>
+
           <div className={'modal-content__separator'}></div>
     
           <div className='modal-content__button'>
-            <CustomButton customClickEvent={isNewPost ? newPost : () => editSelectedPost(selectedPost.id)}  text={isNewPost ? sendText : editText}/>
-          </div>
-          
+
+          <CustomButton
+            customClickEvent={isNewPost ? newPost : () => selectedPost && editSelectedPost(selectedPost.id.toString())}
+            text={isNewPost ? sendText : editText}
+            customClassName={isDisabled ? 'disabled' : ''}
+          />
+
         </div>
+
       </div>
+    </div>
    </>
   );
 }

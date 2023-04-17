@@ -9,7 +9,8 @@
 
 
 .options-container {
-  height: 75px;
+  min-height: 75px;
+  max-height: 100%;
   width: auto;
   position: absolute;
   display: flex;

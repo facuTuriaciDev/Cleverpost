@@ -1,0 +1,21 @@
+@import '../../theme/variables.scss';
+
+.customButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  background-image: $cardGradient;
+  color: #fff;
+
+  &:hover {
+    background-image: $cardGradientHover;
+  }
+}

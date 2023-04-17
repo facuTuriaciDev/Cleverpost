@@ -13,8 +13,6 @@ function Navbar() {
 
   const currentTheme = useSelector((state: RootState) => state.theme);
 
-  const body = document.querySelector('body');
-
   function handleButton() {
     dispatch(setTheme())
   }

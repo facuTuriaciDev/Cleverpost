@@ -34,7 +34,7 @@ const postSlice = createSlice({
     addPost: (state, action) => {
       return {
         ...state,
-        posts: [...state.posts, action.payload]
+        posts: [action.payload, ...state.posts]
       }
     },
     deletePost: (state, action) => {
@@ -44,15 +44,10 @@ const postSlice = createSlice({
         posts: updatedPosts
       }
     },
-    editPost: (state, action) => {
+    editPost(state, action) {
       const { id, title, body } = action.payload;
-      const updatedPosts = state.posts.map(post => {
-        if (post.id === id) {
-          return { ...post, title, body };
-        }
-        return post;
-      });
-      state.posts = updatedPosts;
+      const newPosts = state.posts.map(post => Number(post.id) === Number(id) ? { ...post, title, body } : post);
+      state.posts = newPosts;
     },
     selectPost: (state, action ) => {
       state.selectedPost = action.payload;

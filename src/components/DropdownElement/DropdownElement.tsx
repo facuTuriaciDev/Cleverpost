@@ -11,10 +11,9 @@ interface DropdownElementProps {
   size?: SizeProp;
   classProp?: string;
   customText?: string;
-  onClick?: () => void;
 }
 
-function DropdownElement({ customFunction, onClick, icon, color = '', size = 'xl', classProp = '', customText = '' }: DropdownElementProps) {
+function DropdownElement({ customFunction, icon, color = '', size = 'xl', classProp = '', customText = '' }: DropdownElementProps) {
   return (
     <div className={classProp} onClick={customFunction}>
       <FontAwesomeIcon icon={icon} size={size} color={color}/>

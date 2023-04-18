@@ -3,6 +3,7 @@ import postReducer from '../slices/posts/postSlice';
 import searchReducer from '../slices/posts/searchSlice';
 import themeReducer from '../slices/theme/themeSlice';
 import modalReducer from '../slices/modal/modalSlice';
+import loginSlice from '../slices/login/loginSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     search: searchReducer,
     theme: themeReducer,
     modal: modalReducer,
+    login: loginSlice,
   }
 });
 

@@ -17,16 +17,16 @@ function WriteQuoteModal() {
   const selectedPost = useSelector((state: RootState) => state.post.selectedPost);
   const isNewPost = useSelector((state: RootState) => state.modal.isNewPost);
 
-  const [postTitle, setPostTitle] = useState(isNewPost ? '' : selectedPost.title);
-  const [postBody, setPostBody] = useState((isNewPost ? '' : selectedPost.body));
+  const [postTitle, setPostTitle] = useState(isNewPost ? '' : selectedPost && selectedPost.title)
+  const [postBody, setPostBody] = useState((isNewPost ? '' : selectedPost && selectedPost.body));
   
   const writeTitleText = translate('writeTitle');
   const writeSentenceText = translate('writeSentence');
   const sendText = translate('send');
   const editText = translate('edit');
 
-  const [titleCharsLeft, setTitleCharsLeft] = useState(isNewPost ? 0 : selectedPost.title.length);
-  const [bodyCharsLeft, setBodyCharsLeft] = useState(isNewPost ? 0 : selectedPost.body.length);
+  const [titleCharsLeft, setTitleCharsLeft] = useState(isNewPost ? 0 : selectedPost && selectedPost.title.length);
+  const [bodyCharsLeft, setBodyCharsLeft] = useState(isNewPost ? 0 : selectedPost && selectedPost.body.length);
 
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostBody(e.target.value);

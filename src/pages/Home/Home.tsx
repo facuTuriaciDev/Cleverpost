@@ -7,6 +7,8 @@ import { ThunkDispatch, PayloadAction } from '@reduxjs/toolkit';
 import './Home.scss';
 import WriteQuotemodal from '../../components/WriteQuoteModal/';
 import useFilterPosts from '../../hooks/useFilterPosts';
+import Navbar from '../../components/Navbar';
+
 
 const Home: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, void, PayloadAction> = useDispatch();
@@ -23,7 +25,7 @@ const Home: React.FC = () => {
   return (
     <>
       { isModalOpen && <WriteQuotemodal/> }
-
+      <Navbar />        
       <div className={`card-container ${currentTheme}`}>
         {filteredPosts.map((post) => (
           <PostCard key={post.id} post={post} />

@@ -41,11 +41,16 @@ function WriteQuoteModal() {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
+    document.body.classList.add('modal-open');
+
     if (postBody === '' || postTitle === '') {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
     }
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
   }, [postBody, postTitle]);
 
   const currentTheme = useSelector((state: RootState) => state.theme);

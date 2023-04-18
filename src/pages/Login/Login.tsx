@@ -54,6 +54,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div>
               <input
+                data-testid="username"
                 placeholder={usernamePlaceholderText}
                 type='text'
                 id='username'
@@ -66,6 +67,7 @@ const Login = () => {
                 placeholder={passwordPlaceholderText}
                 type='password'
                 id='password'
+                data-testid="password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)
                 }
@@ -73,11 +75,11 @@ const Login = () => {
             </div>
 
             <div>
-              <button type='submit'>{signInText}</button>
+              <button data-testid="submit" type='submit'>{signInText}</button>
             </div>
 
             <div className='login-container__error'>
-              {showError && <span className='error-message'>{wrongCredentialsText}</span>}
+              {showError && <span data-testid="error-message" className='error-message'>{wrongCredentialsText}</span>}
             </div>
 
           </form>

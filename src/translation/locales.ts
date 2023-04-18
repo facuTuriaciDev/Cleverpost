@@ -7,11 +7,12 @@ const resources = {
       'writeTitle': 'Write your title here...',
       'writeSentence': 'Write your sentence here...',
       'send': 'Send',
-      'signIn': 'Sign in',
-      'signInInstructions': 'Enter your username and password to sign in',
+      'login': 'Login',
+      'loginInstructions': 'Enter your username and password to login',
       'usernamePlaceholder': 'Username',
       'passwordPlaceholder': 'Password',
       'wrongCredentials': 'Incorrect username or password',
+      'enter': 'Enter'
     }
   },
   es: {
@@ -22,11 +23,12 @@ const resources = {
       'writeTitle': 'Escribe aquí el título...',
       'writeSentence': 'Escribe aquí tu frase...',
       'send': 'Enviar',
-      'signIn': 'Iniciar sesión',
-      'signInInstructions': 'Introduce tu nombre de usuario y contraseña para iniciar sesión',
+      'login': 'Iniciar sesión',
+      'loginInstructions': 'Introduce tu nombre de usuario y contraseña para iniciar sesión',
       'usernamePlaceholder': 'Nombre de usuario',
       'passwordPlaceholder': 'Contraseña',
       'wrongCredentials': 'Nombre de usuario o contraseña incorrectos',
+      'enter': 'Entrar'
     }
   }
 };

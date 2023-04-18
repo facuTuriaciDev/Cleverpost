@@ -12,11 +12,12 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const signInText = translate('signIn');
-  const signInInstructionsText = translate('signInInstructions');
+  const loginText = translate('login');
+  const loginInstructions = translate('loginInstructions');
   const usernamePlaceholderText = translate('usernamePlaceholder');
   const passwordPlaceholderText = translate('passwordPlaceholder');
   const wrongCredentialsText = translate('wrongCredentials');
+  const enterText = translate('enter');
 
 
 
@@ -46,8 +47,8 @@ const Login = () => {
 
       <div className='login-container'>
         <div className='login-container__top'>
-          <h1>{signInText}</h1>
-          <p>{signInInstructionsText}</p>
+          <h1>{loginText}</h1>
+          <p>{loginInstructions}</p>
         </div>
 
         <div className= 'login-container__form'>
@@ -75,7 +76,7 @@ const Login = () => {
             </div>
 
             <div>
-              <button data-testid="submit" type='submit'>{signInText}</button>
+              <button data-testid="submit" type='submit'>{enterText}</button>
             </div>
 
             <div className='login-container__error'>

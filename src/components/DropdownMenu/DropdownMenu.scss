@@ -1,10 +1,22 @@
 
 .dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;      
-  padding: 0px 10px 0px 25px;
+  margin: 0 10px 0 25px;
   top: 10px;
   right: 30px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: #e8e8e8bf;
+  }
+
 }
 
 .options-container {
@@ -21,6 +33,7 @@
   border-radius: 10px;
   background-color: #ebf4f5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  z-index: 3;
 
   &__box {
     display: flex;

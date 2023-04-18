@@ -8,19 +8,31 @@
   padding: 0 40px 0 40px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 
-  &__title {
-    font-size: 2rem;
-    color: #416a93;
+
+  &__title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 210px;
+    
+    &--title {
+      font-size: 2rem;
+      color: #416a93;
+    }
   }
 
   &__search {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    
     &__icon {
       width: 32px;
       height: 32px;
+    }
+
+    &__leave {
+      margin: 5px 0 0 0;
     }
 
   }

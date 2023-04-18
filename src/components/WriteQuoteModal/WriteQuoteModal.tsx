@@ -17,8 +17,8 @@ function WriteQuoteModal() {
   const selectedPost = useSelector((state: RootState) => state.post.selectedPost);
   const isNewPost = useSelector((state: RootState) => state.modal.isNewPost);
 
-  const [postTitle, setPostTitle] = useState(isNewPost ? '' : selectedPost && selectedPost.title)
-  const [postBody, setPostBody] = useState((isNewPost ? '' : selectedPost && selectedPost.body));
+  const [postTitle, setPostTitle] = useState(isNewPost ? '' : selectedPost && selectedPost.title || '');
+  const [postBody, setPostBody] = useState(isNewPost ? '' : selectedPost && selectedPost.body || '');
   
   const writeTitleText = translate('writeTitle');
   const writeSentenceText = translate('writeSentence');

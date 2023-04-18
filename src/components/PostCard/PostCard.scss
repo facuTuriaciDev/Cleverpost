@@ -60,6 +60,19 @@
 
 }
 
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
+
+  img {
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+    z-index: 2;
+  }
+  
+}
+
 .card-night {
   background: $cardGradientNight;
 }

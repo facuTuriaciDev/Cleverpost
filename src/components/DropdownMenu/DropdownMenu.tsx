@@ -21,6 +21,7 @@ function DropdownMenu({ handleDelete, currentTheme}: DropdownMenuProps) {
   function handleEdit() {
     dispatch(editPost());
     dispatch(openModal());
+    handleMenu();
   }
   
   function handleMenu(): void {
